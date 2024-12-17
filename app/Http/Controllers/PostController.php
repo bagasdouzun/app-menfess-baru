@@ -30,11 +30,17 @@ class PostController extends Controller
     {
         $request->validate([
             'category_id' => 'required|exists:categories,id',
-            'from' => 'required|unique:posts,from',
-            'to' => 'required|unique:posts,to',
+            'from' => 'required',
+            'to' => 'required',
             'body' => 'required',
             'image' => 'image|mimes:jpeg,png,jpg,gif,webp|max:2048', // Validasi gambar
         ]);
+
+        $slug = Str::slug($request->id);
+        $count = \DB::table('posts')->where('slug', 'like', "{$slug}%")->count();
+        if ($count > 0) {
+            $slug = "{$slug}-" . ($count + 1);
+        }
 
 
         // Handle upload gambar
@@ -50,7 +56,7 @@ class PostController extends Controller
             'category_id' => $request->category_id,
             'from' => $request->from,
             'to' => $request->to,
-            'slug' => Str::slug($request->from),
+            'slug' => $slug,
             'body' => $request->body,
             'image' => $imageName, // Simpan nama file gambar
         ]);
@@ -77,12 +83,22 @@ class PostController extends Controller
     {
         $request->validate([
             'category_id' => 'required|exists:categories,id',
-            'from' => 'required|unique:posts,from,' . $post->id,
-            'to' => 'required|unique:posts,to,' . $post->id,
+            'from' => 'required',
+            'to' => 'required',
             'body' => 'required',
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi gambar
         ]);
 
+        $slug = $post->slug; // Gunakan slug lama
+
+        // Buat slug baru hanya jika slug kosong atau tidak ada sebelumnya
+        if (!$slug) {
+            $slug = Str::slug($request->id);
+            $count = \DB::table('posts')->where('slug', 'like', "{$slug}%")->count();
+        if ($count > 0) {
+            $slug = "{$slug}-" . ($count + 1);
+            }
+        }
 
         // Handle upload gambar (jika ada gambar baru)
         if ($request->hasFile('image')) {
@@ -106,7 +122,7 @@ class PostController extends Controller
             'category_id' => $request->category_id,
             'from' => $request->from,
             'to' => $request->to,
-            'slug' => Str::slug($request->from),
+            'slug' => $slug,
             'body' => $request->body,
             'image' => $imageName, // Simpan nama file gambar
         ]);
