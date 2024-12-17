@@ -74,7 +74,7 @@ Users
 
                         {{ $users->links() }}
                     @else
-                        <p>You are not logged in. Please <a href="{{ route('signin') }}">log in</a> to view users.</p>
+                        <p>Hanya admin yang diperbolehkan mengakses halaman ini.</p>
                     @endauth
                 </div>
             </div>
