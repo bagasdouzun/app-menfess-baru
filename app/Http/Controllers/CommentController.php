@@ -13,17 +13,20 @@ class CommentController extends Controller
     {
         $request->validate([
             'content' => 'required|string',
+            'name' => 'required|string',  // Validasi untuk nama
             'parent_id' => 'nullable|exists:comments,id',
         ]);
 
-        $comment = Comment::create([
+        Comment::create([
             'content' => $request->content,
             'post_id' => $postId,
             'parent_id' => $request->parent_id,
+            'name' => $request->name,  // Menyimpan nama pengomentar
         ]);
 
         return redirect()->route('posts.show', $postId);  // Kembali ke halaman postingan
     }
+
 
     // Menampilkan komentar pada postingan
     public function show(Post $post)

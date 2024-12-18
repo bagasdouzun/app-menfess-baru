@@ -69,12 +69,12 @@
 <h3>Comments:</h3>
 @foreach($comments as $comment)
     <div class="comment">
-        <p>{{ $comment->content }}</p>
+        <p><strong>{{ $comment->name }}</strong>: {{ $comment->content }}</p>
 
         <!-- Menampilkan balasan (reply) -->
         @foreach($comment->replies as $reply)
             <div class="reply" style="margin-left: 20px;">
-                <p>{{ $reply->content }}</p>
+                <p><strong>{{ $reply->name }}</strong>: {{ $reply->content }}</p>
             </div>
         @endforeach
 
@@ -82,6 +82,7 @@
         <form action="{{ route('comments.store', $post->id) }}" method="POST">
             @csrf
             <input type="hidden" name="parent_id" value="{{ $comment->id }}">
+            <input type="text" name="name" placeholder="Your Name" required>
             <textarea name="content" required></textarea>
             <button type="submit">Reply</button>
         </form>
@@ -91,6 +92,7 @@
 <!-- Form untuk komentar baru -->
 <form action="{{ route('comments.store', $post->id) }}" method="POST">
     @csrf
+    <input type="text" name="name" placeholder="Your Name" required>
     <textarea name="content" required></textarea>
     <button type="submit">Post Comment</button>
 </form>
