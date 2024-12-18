@@ -30,7 +30,7 @@
             <textarea class="form-control" id="body" name="body" rows="3">{{ $post->body }}</textarea>
         </div>
         <div class="mb-3">
-            <label for="image" class="form-label">Gambar</label>
+            <label for="image" class="form-label">Gambar (Optional)</label>
             <input type="file" class="form-control" id="image" name="image">
             @if ($post->image)
                 <img src="{{ asset('images/posts/' . $post->image) }}" alt="{{ $post->title }}" class="img-thumbnail mt-2" width="200">

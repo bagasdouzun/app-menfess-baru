@@ -45,7 +45,7 @@ Home
                 @endif
                 <div class="card-body">
                     <h5 class="card-title">To : {{ $post->to }}</h5>
-                    <p class="card-text">{{ Str::limit($post->body, 100) }}</p>
+                    <p class="card-text">"{{ Str::limit($post->body, 100) }}"</p>
                     <a href="{{ route('posts.show', $post) }}" class="btn btn-primary">Baca Selengkapnya</a>
                 </div>
             </div>

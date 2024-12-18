@@ -29,7 +29,7 @@
             <textarea class="form-control" id="body" name="body" rows="3"></textarea>
         </div>
         <div class="mb-3">
-            <label for="image" class="form-label">Gambar</label>
+            <label for="image" class="form-label">Gambar (Optional)</label>
             <input type="file" class="form-control" id="image" name="image">
         </div>
         <button type="submit" class="btn btn-primary">Simpan</button>
