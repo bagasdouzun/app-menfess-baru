@@ -62,4 +62,37 @@
         alert('Link telah disalin!');
     });
 </script>
+
+<h1>{{ $post->title }}</h1>
+<p>{{ $post->content }}</p>
+
+<h3>Comments:</h3>
+@foreach($comments as $comment)
+    <div class="comment">
+        <p>{{ $comment->content }}</p>
+
+        <!-- Menampilkan balasan (reply) -->
+        @foreach($comment->replies as $reply)
+            <div class="reply" style="margin-left: 20px;">
+                <p>{{ $reply->content }}</p>
+            </div>
+        @endforeach
+
+        <!-- Form reply -->
+        <form action="{{ route('comments.store', $post->id) }}" method="POST">
+            @csrf
+            <input type="hidden" name="parent_id" value="{{ $comment->id }}">
+            <textarea name="content" required></textarea>
+            <button type="submit">Reply</button>
+        </form>
+    </div>
+@endforeach
+
+<!-- Form untuk komentar baru -->
+<form action="{{ route('comments.store', $post->id) }}" method="POST">
+    @csrf
+    <textarea name="content" required></textarea>
+    <button type="submit">Post Comment</button>
+</form>
+
 @endsection

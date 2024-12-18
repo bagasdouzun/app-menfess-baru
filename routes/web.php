@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserController;
@@ -38,3 +39,6 @@ Route::put('/users/{user}', [UserController::class, 'update'])->name('users.upda
 Route::resource('categories', CategoryController::class);
 
 Route::resource('posts', PostController::class);
+
+Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
+Route::get('/posts/{post}', [CommentController::class, 'show'])->name('posts.show');
