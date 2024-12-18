@@ -14,7 +14,10 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
-Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+
+Route::get('contacts/create', [ContactController::class, 'create'])->name('contacts.create');
+Route::post('contacts/store', [ContactController::class, 'store'])->name('contacts.store');
+Route::get('contacts', [ContactController::class, 'index'])->name('contacts.index');
 
 Route::get('/signup', [AuthController::class, 'signup'])->name('signup');
 Route::post('/store-signup', [AuthController::class, 'storeSignUp'])->name('storeSignUp');

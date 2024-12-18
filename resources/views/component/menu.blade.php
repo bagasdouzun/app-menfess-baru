@@ -10,7 +10,7 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="{{ route('home') }}">Home</a>
+              <a class="nav-link" aria-current="page" href="{{ route('home') }}">Home</a>
             </li>
             <!--<li class="nav-item">
               <a class="nav-link" href="{{ route('profile') }}">Profil</a>
@@ -19,7 +19,7 @@
               <a class="nav-link" href="{{ route('about') }}">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ route('contact') }}">Contact</a>
+              <a class="nav-link" href="{{ route('contacts.create') }}">Contact</a>
             </li>
           </ul>
         </div>
@@ -36,6 +36,9 @@
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="{{ route('posts.index') }}">Postingan</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{{ route('contacts.index') }}">Pengaduan</a>
                 </li>
               </ul>
             </div>
